@@ -4,9 +4,9 @@
     <title>BUYSELL</title>
 </head>
 <body>
-<h1>BUYSELL</h1><hr>
+<h1><a href="/">BUYSELL</a></h1><hr>
 <h3>Подробная информация о пользователе ${user.name}</h3>
-<b>Номер телефона: </b> ${user.phoneNumber}<br>
+<b>Номер телефона: </b> <br>
 <b>Email: </b> ${user.email}<br>
 <h4>Товары пользователя ${user.name}</h4>
 <#list products as product>

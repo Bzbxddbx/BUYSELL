@@ -8,6 +8,7 @@
 <h3>Подробная информация о пользователе ${user.name}</h3>
 <b>Номер телефона: </b> <br>
 <b>Email: </b> ${user.email}<br>
+<b>Номер телефона: </b> ${user.phoneNumber}<br>
 <h4>Товары пользователя ${user.name}</h4>
 <#list products as product>
 <div>

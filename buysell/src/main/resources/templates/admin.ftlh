@@ -20,7 +20,7 @@
     <#list users as user>
     <tr>
         <th>${user.email}</th>
-        <th>Номер телефона</th>
+        <th>${user.phoneNumber}</th>
         <th><#if user.active>true<#else>false</#if></th>
         <th><#list user.roles as role>${role}</#list></th>
         <th>

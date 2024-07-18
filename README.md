@@ -9,6 +9,6 @@
 #### Реализован личный кабинет
 #### Все данные сохраняются в БД
 ## Стеки технологий
-### Spring (Boot, Security), Hibernate, Git, база данных - MySQL
+#### Spring (Boot, Security), Hibernate, Git, база данных - MySQL
 ## Использованные источники
 #### Гайд на YouTube - https://www.youtube.com/playlist?list=PLMN3dELi3-VdVo8NGOYqaOLC2alq6ZmSh

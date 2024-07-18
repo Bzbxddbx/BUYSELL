@@ -20,6 +20,7 @@ import java.security.Principal;
 public class ProductController {
     private final ProductService productService;
 
+    // Метод для отображения списка продуктов.
     @GetMapping("/")
     public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal, Model model) {
         model.addAttribute("products", productService.listProducts(title));
@@ -28,6 +29,7 @@ public class ProductController {
         return "products";
     }
 
+    // Метод для отображения информации о продукте.
     @GetMapping("/product/{id}")
     public String productInfo(@PathVariable Long id, Model model, Principal principal) {
         Product product = productService.getProductById(id);
@@ -38,6 +40,7 @@ public class ProductController {
         return "product-info";
     }
 
+    // Метод для создания нового продукта.
     @PostMapping("/product/create")
     public String createProduct(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
                                 @RequestParam("file3") MultipartFile file3, Product product, Principal principal) throws IOException {
@@ -45,12 +48,14 @@ public class ProductController {
         return "redirect:/my/products";
     }
 
+    // Метод для удаления продукта.
     @PostMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id, Principal principal) {
         productService.deleteProduct(productService.getUserByPrincipal(principal), id);
         return "redirect:/my/products";
     }
 
+    // Метод для отображения продуктов текущего пользователя.
     @GetMapping("/my/products")
     public String userProducts(Principal principal, Model model) {
         User user = productService.getUserByPrincipal(principal);

@@ -21,11 +21,13 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
 
+    // Метод для получения списка продуктов.
     public List<Product> listProducts(String title) {
         if (title != null) return productRepository.findByTitle(title);
         return productRepository.findAll();
     }
 
+    // Метод для сохранения продукта.
     public void saveProduct(Principal principal, Product product, MultipartFile file1, MultipartFile file2, MultipartFile file3) throws IOException {
         product.setUser(getUserByPrincipal(principal));
         Image image1;
@@ -50,11 +52,13 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    // Метод для получения пользователя по объекту Principal.
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
     }
 
+    // Метод для преобразования MultipartFile в объект Image.
     private Image toImageEntity(MultipartFile file) throws IOException {
         Image image = new Image();
         image.setName(file.getName());
@@ -65,6 +69,7 @@ public class ProductService {
         return image;
     }
 
+    // Метод для удаления продукта.
     public void deleteProduct(User user, Long id) {
         Product product = productRepository.findById(id)
                 .orElse(null);
@@ -79,6 +84,7 @@ public class ProductService {
             log.error("Product with id = {} is not found", id);
         }    }
 
+    // Метод для получения продукта по его id.
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
     }

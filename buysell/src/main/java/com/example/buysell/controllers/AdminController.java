@@ -21,6 +21,7 @@ import java.util.Map;
 public class AdminController {
     private final UserService userService;
 
+    // Метод для отображения страницы администратора.
     @GetMapping("/admin")
     public String admin(Model model, Principal principal) {
         model.addAttribute("users", userService.list());
@@ -28,12 +29,14 @@ public class AdminController {
         return "admin";
     }
 
+    // Метод для блокировки пользователя.
     @PostMapping("/admin/user/ban/{id}")
     public String userBan(@PathVariable("id") Long id) {
         userService.banUser(id);
         return "redirect:/admin";
     }
 
+    // Метод для отображения страницы редактирования пользователя.
     @GetMapping("/admin/user/edit/{user}")
     public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
@@ -42,6 +45,7 @@ public class AdminController {
         return "user-edit";
     }
 
+    // Метод для изменения роли пользователя.
     @PostMapping("/admin/user/edit")
     public String userEdit(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.changeUserRoles(user, form);

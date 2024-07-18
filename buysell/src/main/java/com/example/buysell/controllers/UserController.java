@@ -16,12 +16,14 @@ import java.security.Principal;
 public class UserController {
     private final UserService userService;
 
+    // Метод для отображения страницы входа.
     @GetMapping("/login")
     public String login(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "login";
     }
 
+    // Метод для отображения профиля пользователя.
     @GetMapping("/profile")
     public String profile(Principal principal,
                           Model model) {
@@ -30,13 +32,14 @@ public class UserController {
         return "profile";
     }
 
+    // Метод для отображения страницы регистрации.
     @GetMapping("/registration")
     public String registration(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "registration";
     }
 
-
+    // Метод для создания нового пользователя.
     @PostMapping("/registration")
     public String createUser(User user, Model model) {
         if (!userService.createUser(user)) {
@@ -46,6 +49,7 @@ public class UserController {
         return "redirect:/login";
     }
 
+    // Метод для отображения информации о пользователе.
     @GetMapping("/user/{user}")
     public String userInfo(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);

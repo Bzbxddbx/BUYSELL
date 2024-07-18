@@ -22,6 +22,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    // Метод для создания нового пользователя.
     public boolean createUser(User user) {
         String userEmail = user.getEmail();
         if (userRepository.findByEmail(userEmail) != null) return false;
@@ -33,10 +34,12 @@ public class UserService {
         return true;
     }
 
+    // Метод для получения списка всех пользователей.
     public List<User> list() {
         return userRepository.findAll();
     }
 
+    // Метод для блокировки или разблокировки пользователя.
     public void banUser(Long id) {
         User user = userRepository.findById(id).orElse(null);
         if (user != null) {
@@ -51,6 +54,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    // Метод для изменения ролей пользователя.
     public void changeUserRoles(User user, Map<String, String> form) {
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
@@ -64,6 +68,7 @@ public class UserService {
         userRepository.save(user);
     }
 
+    // Метод для получения пользователя по объекту Principal.
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());

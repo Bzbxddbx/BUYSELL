@@ -19,6 +19,7 @@ public class SecurityConfig {
     private final CustomUserDetailsService userDetailsService;
     private AuthenticationManagerBuilder auth;
 
+    // Метод для настройки цепочки фильтров безопасности.
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -37,16 +38,19 @@ public class SecurityConfig {
         return http.build();
     }
 
+    // Метод для создания и настройки кодировщика паролей.
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(8);
     }
 
+    // Метод для установки auth для настройки аутентификации.
     @Autowired
     public void setAuth(AuthenticationManagerBuilder auth) {
         this.auth = auth;
     }
 
+    // Метод для глобальной настройки аутентификации.
     @Bean
     @Primary
     public AuthenticationManagerBuilder configureGlobal() throws Exception {
